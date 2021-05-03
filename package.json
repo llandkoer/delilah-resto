@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/llandkoer/delilah-resto/issues"
   },
-  "homepage": "https://github.com/llandkoer/delilah-resto#readme"
+  "homepage": "https://github.com/llandkoer/delilah-resto#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.7"
+  }
 }
