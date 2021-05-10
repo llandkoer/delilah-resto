@@ -26,6 +26,7 @@
     "express-validator": "^6.11.0",
     "helmet": "^4.6.0",
     "jsonwebtoken": "^8.5.1",
+    "mariadb": "^2.5.3",
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
