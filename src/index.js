@@ -1,14 +1,10 @@
-const express = require('express');
-const sequelize = require ('./connection');
-const router = require('./routes/login');
-const app = express()
-const Port= 3001;
+const app = require("./app");
 
-app.use(express.json())
+const PORT = 3000;
 
-// app.use(require('./routes/login'))
+async function init() {
+  await app.listen(PORT);
+  console.log(`Server on port ${PORT}`);
+}
 
-app.listen(Port, ()=>{
-    console.log(`listen in port ${Port}`)
-})
-
+init();
