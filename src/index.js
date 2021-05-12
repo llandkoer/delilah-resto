@@ -1,5 +1,7 @@
 const app = require("./app");
 
+require("./connection");
+
 const PORT = 3000;
 
 async function init() {
