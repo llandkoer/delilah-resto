@@ -1,31 +1,30 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 
 const config = require("../config/config");
 
 const sequelize = require("../connection");
 
-const encryptPassword = require("../middlewares/encryptPassword");
-
 const createUser = async (req, res) => {
-  const { username, full_name, email, phone_number, address, role_id, password } = req.body;
+  let { username, full_name, email, phone_number, address, role_id, password } = req.body;
+  const salt = await bcrypt.genSalt(10);
+  password = await bcrypt.hash(password, salt);
   const arrayInsertUser = [`${username}`, `${full_name}`, `${email}`, `${phone_number}`, `${address}`, `${role_id}`, `${password}`];
 
   try {
-    // TODO: Add encrypt function definition
     // TODO: Validations
-    arrayInsertUser[6] = await encryptPassword(password);
     const result = await sequelize.query(
       "INSERT INTO users(username, full_name, email, phone_number, address, role_id, password) VALUES( ?, ?, ?, ?, ?, ?, ?)",
-      { replacements: arrayInsertUser, type: sequelize.QueryTypes.INSERT },
+      { replacements: arrayInsertUser, type: sequelize.QueryTypes.INSERT }
     );
     // ! Use JWT just when loggin
     // TODO: Sign just username and role
-    const token = jwt.sign({}, config.jwt.secretKey, {
-      expiresIn: 60 * 60 * 24,
-    });
+    // const token = jwt.sign({}, config.jwt.secretKey, {
+    //   expiresIn: 60 * 60 * 24,
+    // });
 
     console.log(result);
-    res.status(201).json({ auth: true, token });
+    res.status(201).json({ auth: true });
   } catch (error) {
     console.log(`Insertion error: ${error}`);
   }
