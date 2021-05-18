@@ -1,7 +1,7 @@
 const Sequelize = require("sequelize");
 const { config } = require("./config/config");
 
-const path = `mysql://${config.username}:${config.password}@${config.host}:3306/${config.database}`;
+const path = `mysql://${config.db.username}:${config.db.password}@${config.db.host}:3306/${config.db.database}`;
 
 const sequelize = new Sequelize(path, {
   operatorsAliases: false,
@@ -10,7 +10,7 @@ const sequelize = new Sequelize(path, {
 
 sequelize.authenticate()
   .then(() => {
-    console.log("Database is connected", config.database);
+    console.log("Database is connected", config.db.database);
   })
   .catch((err) => {
     console.error("Connection error:", err);
