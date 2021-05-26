@@ -8,7 +8,7 @@ const config = {
     host: process.env.DB_HOST,
   },
   jwt: {
-    secretKey: process.env.JWT_kEY,
+    secretKey: process.env.JWT_KEY,
   },
 };
 
