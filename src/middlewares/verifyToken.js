@@ -21,8 +21,7 @@ const verifyToken = (number, role) => {
         next();
       });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "There was an error on server" });
+      res.status(500).json({ error, message: "There was an error on server" });
     }
   };
 };
