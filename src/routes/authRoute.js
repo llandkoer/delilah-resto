@@ -9,6 +9,4 @@ router.post("/signup", authMiddlewares.signupValidations(), authController.creat
 
 router.post("/login", authMiddlewares.loginValidations(), authController.loginUser);
 
-router.get("/me", authController.verifyToken);
-
 module.exports = router;
