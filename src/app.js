@@ -7,7 +7,7 @@ const helmet = require("helmet");
 const app = express();
 
 const authRoute = require("./routes/authRoute");
-const productRoute = require("./routes/productRoute")
+const productRoute = require("./routes/productRoute");
 
 // Middlewares
 app.use(express.json());
