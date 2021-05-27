@@ -43,8 +43,6 @@ const createUser = async (req, res) => {
   }
 };
 
-// TODO: User can login also with username
-
 const loginUser = async (req, res) => {
   try {
     const { email, password, username } = req.body;
