@@ -19,6 +19,6 @@ app.use(helmet());
 // Routes
 app.use("/api/v1.0/users", authRoute);
 app.use("/api/v1.0/products", productRoute);
-app.use("/api/v1.0/users", ordersRoute);
+app.use("/api/v1.0/orders", ordersRoute);
 
 module.exports = app;
