@@ -45,6 +45,11 @@ const createUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
     const { email, password, username } = req.body;
     if (!email && !username) {
       return res.status(403).json({ auth: false, token: null, message: "Email or username required" });
