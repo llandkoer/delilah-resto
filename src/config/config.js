@@ -9,6 +9,8 @@ const config = {
   },
   jwt: {
     secretKey: process.env.JWT_KEY,
+    admin: process.env.JWT_ADMIN,
+    user: process.env.JWT_USER,
   },
 };
 
