@@ -35,4 +35,4 @@ exports.signupValidations = () => [
     .withMessage("Password must be between 10 and 255 characters long"),
 ];
 
-exports.loginValidations = () => [check("email").isEmail().withMessage("Email is not valid"), check("password").notEmpty().withMessage("Password is required")];
+exports.loginValidations = () => [check("password").notEmpty().withMessage("Password is required")];
