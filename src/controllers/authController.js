@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
       return res.status(403).json({ auth: false, token: null, message: "Email or username required" });
     }
 
-    let user = await sequelize.query(`SELECT user_id, role_id, password FROM users WHERE email = ? OR username = ?`, {
+    let user = await sequelize.query(`SELECT user_id, role_id, address, password FROM users WHERE email = ? OR username = ?`, {
       replacements: [`${email}`, `${username}`],
       type: sequelize.QueryTypes.SELECT,
     });
@@ -70,7 +70,7 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ auth: false, token: null, message: "Wrong password" });
     }
 
-    const token = jwt.sign({ id: user.user_id, role: user.role_id }, config.jwt.secretKey, {
+    const token = jwt.sign({ id: user.user_id, role: user.role_id, address: user.address }, config.jwt.secretKey, {
       expiresIn: 60 * 60 * 24,
     });
 
