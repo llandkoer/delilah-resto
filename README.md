@@ -41,8 +41,10 @@ npm i
 **Clarification**: It is not possible to create administrator users via routes. To perform operations that only an administrator can perform, an administrator user will be created in the SQL script. You will be able to log in with the following data.
 
 ```json
+{
 "email": "admin@admin.com",
 "password": "44721327248817"
+}
 ```
 
 **Reminder**: The server will run on port 3000 of your computer.
