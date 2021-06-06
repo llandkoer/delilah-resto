@@ -1,4 +1,4 @@
-CREATE DATABASE deliah_resto;
+CREATE DATABASE delilah_resto;
 
 USE delilah_resto;
 
