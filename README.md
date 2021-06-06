@@ -36,7 +36,7 @@ npm i
 
 4. Create an `.env` file inside the `src` folder of the project. Use the `template.env` file to understand what data you need to have. All this data will depend on the configuration you have given to MariaDB and JWT except for the last two (`JWT_ADMIN` and `JWT_USER`). The values to be assigned to these should be `1` and `2` respectively.
 
-5. Start making requests according to the documentation and through Postman (or a similar application).
+5. Run the  server with Node (or Nodemon) and start making requests according to the documentation and through Postman (or a similar application).
 
 **Clarification**: It is not possible to create administrator users via routes. To perform operations that only an administrator can perform, an administrator user will be created in the SQL script. You will be able to log in with the following data.
 
