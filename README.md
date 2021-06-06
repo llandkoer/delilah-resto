@@ -42,8 +42,8 @@ npm i
 
 ```json
 {
-"email": "admin@admin.com",
-"password": "44721327248817"
+  "email": "admin@admin.com",
+  "password": "44721327248817"
 }
 ```
 
