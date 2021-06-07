@@ -1,0 +1,331 @@
+swagger: "2.0"
+info:
+  title: "Delilah Restó"
+  description: "Backend for an online ordering system for a restaurant. REST API to perform CRUD operations on a data structure."
+  version: "1.0.0"
+  contact:
+    name: "Luis Landkoer"
+    email: "llandkoer@gmail.com"
+  license:
+    name: "MIT"
+    url: "https://en.wikipedia.org/wiki/MIT_License"
+host: "localhost:3000"
+schemes:
+- "http"
+paths:
+
+  /api/v1.0/users/signup:
+    post:
+      tags:
+        - "Users"
+      summary: "Create a new user"
+      description: "Create a new client account"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Model of user to be created"
+          required: true
+          schema:
+            $ref: "#/definitions/Create-Users"
+      responses:
+        201:
+          description: "User created"
+        422:
+          description: "Missing or incorrect data"
+        409:
+          description: "Username, email or phone number already exist on database"
+        500:
+          description: "Server error"
+
+  /api/v1.0/users/login:
+    post:
+      tags:
+        - "Users"
+      summary: "Users login"
+      description: "Both clients and admins can generate the token to access their corresponding routes"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User model to be logged in"
+        required: true
+        schema:
+          $ref: "#/definitions/Login-Users"
+      responses:
+        201:
+          description: "User logged in"
+        422:
+          description: "Missing or incorrect data"
+        403:
+          description: "Email or username required"
+        404:
+          description: "Email or username does not exist"
+        401:
+          description: "Wrong password"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/all-orders:
+    get:
+      tags:
+        - "Orders"
+      summary: "Get all created orders"
+      description: "Admin users can get all orders and its information related"
+      produces:
+        - application/json
+      parameters:
+        - in: "header"
+          type: "string"
+          name: "x-access-token"
+          description: "Token"
+          required: true
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/order-states:
+    get:
+      tags:
+        - "Orders"
+      summary: "Get order states"
+      description: "Admin users can get all the order states and their ID"
+      produces:
+        - application/json
+      parameters:
+        - in: "header"
+          type: "string"
+          name: "x-access-token"
+          description: "Token"
+          required: true
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/payment-methods:
+    get:
+      tags:
+        - "Orders"
+      summary: "Get payment methods"
+      description: "Admin users can get all the payment methods and their ID"
+      produces:
+        - application/json
+      parameters:
+        - in: "header"
+          type: "string"
+          name: "x-access-token"
+          description: "Token"
+          required: true
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/all-favorites:
+    get:
+      tags:
+        - "Orders"
+      summary: "Get all favorites"
+      description: "Client users can get all their favorites dishes"
+      produces:
+        - application/json
+      parameters:
+        - in: "header"
+          type: "string"
+          name: "x-access-token"
+          description: "Token"
+          required: true
+      responses:
+        200:
+          description: "OK"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/create-order:
+    post:
+      tags:
+        - "Orders"
+      summary: "Create a new order"
+      description: "Client users can create a new order with custom products and payment method"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Model of order to be created"
+        required: true
+        schema:
+          $ref: "#/definitions/Order"
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
+      responses:
+        200:
+          description: "Order created"
+        422:
+          description: "Missing or incorrect data"
+        400:
+          description: "Incorrect data"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/set-favorite:
+    post:
+      tags:
+        - "Orders"
+      summary: "Set a new favorite dish"
+      description: "Client users can set a dish as their favorite"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Model of favorite to be created"
+        required: true
+        schema:
+          $ref: "#/definitions/Favorite"
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
+      responses:
+        200:
+          description: "Favorites setted"
+        422:
+          description: "Missing or incorrect data"
+        400:
+          description: "Product does not exist"
+        500:
+          description: "Server error"
+
+  /api/v1.0/orders/update-state/{order_id}:
+    put:
+      tags:
+        - "Orders"
+      summary: "Update order states"
+      description: "Admin users can update the orders states"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Model of order state to be update"
+        required: true
+        schema:
+          $ref: "#/definitions/Order-State"
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
+      - in: "path"
+        type: "string"
+        name: "order_id"
+        required: true
+      responses:
+        200:
+          description: "Order state updated"
+        422:
+          description: "Missing or incorrect data"
+        400:
+          description: "Bad request"
+        500:
+          description: "Server error"
+
+  /api/v1.0/products/create:
+    post:
+      tags:
+        - "Products"
+      summary: Alta
+      description: Alta de un nuevo Vehículo
+      responses:
+        200:
+          description: OK
+        405:
+          description: Elemento Invalido
+
+  /api/v1.0/products/allproducts:
+    get:
+      tags:
+        - "Products"
+      summary: Alta
+      description: Alta de un nuevo Vehículo
+      responses:
+        200:
+          description: OK
+        405:
+          description: Elemento Invalido
+
+definitions:
+  Create-Users:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: "caandrade"
+      full_name:
+        type: "string"
+        example: "Camila Andrade"
+      email:
+        type: "string"
+        example: "caandrade@hotmail.com"
+      phone_number:
+        type: "string"
+        example: "32169698888"
+      address:
+        type: "string"
+        example: "ANYVILLE RD NW #2 ANYTOWN AZ"
+      password:
+        type: "string"
+        example: "strong-password123"
+    required:
+      - username
+      - full_name
+      - email
+      - phone_number
+      - address
+      - password
+  Login-Users:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+        example: "caandrade@hotmail.com"
+      password:
+        type: "string"
+        example: "strong-password123"
+    required:
+      - email
+      - password
+  Order-State:
+    type: "object"
+    properties:
+      order_state_id:
+        type: "integer"
+        example: 4
+    required:
+      - order_state_id
+  Order:
+    type: "object"
+    properties:
+      payment_method_id:
+        type: "integer"
+        example: "1"
+      products:
+        type: "array"
+        items:
+          type: "integer"
+          example: 3
+    required:
+      - payment_method_id
+      - products
+  Favorite:
+    type: "object"
+    properties:
+      product_id:
+        type: "integer"
+        example: "1"
+    required:
+      - product_id
