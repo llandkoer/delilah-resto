@@ -14,9 +14,6 @@ const createUser = async (req, res) => {
     }
 
     let { username, full_name, email, phone_number, address, password } = req.body;
-    if (!username || !full_name || !email || !phone_number || !address || !password) {
-      return res.status(401).json({ message: "Missing data. Please fill all require inputs" });
-    }
 
     const user = await sequelize.query(`SELECT user_id FROM users WHERE email = ? OR username = ? OR phone_number = ?`, {
       replacements: [`${email}`, `${username}`, `${phone_number}`],
