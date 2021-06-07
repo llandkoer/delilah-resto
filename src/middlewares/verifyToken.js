@@ -17,6 +17,8 @@ const verifyToken = (roleId, role) => (req, res, next) => {
       if (decoded.role !== roleId) {
         return res.status(401).json({ message: `User is not ${role}` });
       }
+      req.body.address = decoded.address;
+      req.body.id = decoded.id;
       next();
     });
   } catch (error) {
