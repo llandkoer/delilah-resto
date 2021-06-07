@@ -7,6 +7,8 @@ const createProduct = async (req, res) => {
     photo
   } = req.body
 
+  
+
   const arrayInsertProduct = [`${name}`, `${price}`, `${photo}`]
 
   try {
