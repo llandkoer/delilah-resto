@@ -23,14 +23,26 @@ const updateOrderState = async (req, res) => {
     const { id } = req.params;
     const { order_state_id } = req.body;
 
+    if(Number.isNaN(parseInt(id))){
+      return res.status(400).json({ message: "Order ID is NaN" })
+    }
+
+    const order = await sequelize.query(`SELECT * FROM orders WHERE order_id = ${id}`, {
+      type: sequelize.QueryTypes.SELECT,
+    })
+
+    if(!order[0]){
+      return res.status(400).json({ message: "Order does not exist" })
+    }
+
     await sequelize.query(`UPDATE orders SET order_state_id = ${order_state_id} WHERE order_id = ${id}`, {
       type: sequelize.QueryTypes.UPDATE,
     });
 
-    const order = await sequelize.query(`SELECT * FROM orders WHERE order_id = ${id}`, {
+    const updated_order = await sequelize.query(`SELECT * FROM orders WHERE order_id = ${id}`, {
       type: sequelize.QueryTypes.SELECT,
     });
-    res.status(200).json({ message: "Your order state have been updated", order });
+    res.status(200).json({ message: "Your order state have been updated", updated_order });
   } catch (error) {
     res.status(500).json({ error, message: "There is a mistake on server" });
   }
