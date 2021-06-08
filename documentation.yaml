@@ -238,25 +238,93 @@ paths:
     post:
       tags:
         - "Products"
-      summary: Alta
-      description: Alta de un nuevo Vehículo
+      summary: Create a products
+      description: Create a new product
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          $ref: "#/definitions/Create-Product"
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
       responses:
         200:
-          description: OK
-        405:
-          description: Elemento Invalido
+          description: "Successfully created product"
+        400:
+          description: "Incorrect data"
+        500:
+          description: "Server error"
 
   /api/v1.0/products/allproducts:
     get:
       tags:
         - "Products"
       summary: Alta
-      description: Alta de un nuevo Vehículo
+      description: "Users can see all available dishes"
       responses:
         200:
           description: OK
-        405:
-          description: Elemento Invalido
+        500:
+          description: "Server error"
+          
+  
+  
+  /api/v1.0/products/delete:
+    delete:
+      tags:
+        - "Products"
+      summary: "Delete product"
+      description: "Delete product"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Delete product by id"
+          required: true
+          schema:
+            $ref: "#/definitions/Delete-Product"
+        - in: "path"
+          type: "string"
+          name: "id"
+          required: true
+        
+      responses:
+        200:
+          description: "Product successfully deleted"
+        400:
+          description: "id not existing"
+        500:
+          description: "Server error"
+          
+  /api/v1.0/products/update:id:
+    put:
+      tags:
+        - "Products"
+      summary: "Edit product"
+      description: "Edit product information by id"
+      produces:
+        - application/json
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Delete product by id"
+          required: true
+          schema:
+            $ref: "#/definitions/update-Product"
+        - in: "path"
+          type: "string"
+          name: "id"
+          required: true
+      responses:
+        200:
+          description: "Product successfully updated"
+        500:
+          description: "Server error"
 
 definitions:
   Create-Users:
@@ -321,6 +389,49 @@ definitions:
     required:
       - payment_method_id
       - products
+  Create-Product:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "Hot dog"
+      price:
+        type: "number"
+        example: "18500"
+      photo:
+        type: "string"
+        example: "https://dam.cocinafacil.com.mx/wp-content/uploads/2019/04/hot-dog-hawaiano.png"
+    required:
+      - name
+      - price
+      - photo
+      
+  update-Product:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "Salchipapa"
+      price:
+        type: "number"
+        example: "29500"
+      photo:
+        type: "string"
+        example: "https://i.pinimg.com/736x/26/8e/eb/268eeba635559cce7511d7769980204d.jpg"
+    required:
+      - name
+      - price
+      - photo
+
+  Delete-Product:
+    type: "object"
+    properties:
+      Id:
+        type: "number"
+        example: "287"
+    required:
+      - id
+
   Favorite:
     type: "object"
     properties:
