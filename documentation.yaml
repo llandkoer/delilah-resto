@@ -238,7 +238,7 @@ paths:
     post:
       tags:
         - "Products"
-      summary: Create a products
+      summary: Create a product
       description: Create a new product
       parameters:
       - in: "body"
@@ -259,12 +259,36 @@ paths:
         500:
           description: "Server error"
 
-  /api/v1.0/products/allproducts:
+  /api/v1.0/products/all-products:
     get:
       tags:
         - "Products"
-      summary: Alta
+      summary: Get all products
       description: "Users can see all available dishes"
+      parameters:
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
+      responses:
+        200:
+          description: OK
+        500:
+          description: "Server error"
+          
+  /api/v1.0/products/all-products-admin:
+    get:
+      tags:
+        - "Products"
+      summary: Get all products
+      description: "Users can see all available dishes"
+      parameters:
+      - in: "header"
+        type: "string"
+        name: "x-access-token"
+        description: "Token"
+        required: true
       responses:
         200:
           description: OK
@@ -273,11 +297,11 @@ paths:
           
   
   
-  /api/v1.0/products/delete:
+  /api/v1.0/products/delete/{id}:
     delete:
       tags:
         - "Products"
-      summary: "Delete product"
+      summary: "Delete a product"
       description: "Delete product"
       produces:
         - application/json
@@ -292,6 +316,11 @@ paths:
           type: "string"
           name: "id"
           required: true
+        - in: "header"
+          type: "string"
+          name: "x-access-token"
+          description: "Token"
+          required: true
         
       responses:
         200:
@@ -301,11 +330,11 @@ paths:
         500:
           description: "Server error"
           
-  /api/v1.0/products/update:id:
+  /api/v1.0/products/update/{id}:
     put:
       tags:
         - "Products"
-      summary: "Edit product"
+      summary: "update a product"
       description: "Edit product information by id"
       produces:
         - application/json
