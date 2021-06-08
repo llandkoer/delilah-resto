@@ -276,7 +276,7 @@ paths:
           description: OK
         500:
           description: "Server error"
-          
+
   /api/v1.0/products/all-products-admin:
     get:
       tags:
@@ -294,9 +294,7 @@ paths:
           description: OK
         500:
           description: "Server error"
-          
-  
-  
+
   /api/v1.0/products/delete/{id}:
     delete:
       tags:
@@ -321,7 +319,7 @@ paths:
           name: "x-access-token"
           description: "Token"
           required: true
-        
+
       responses:
         200:
           description: "Product successfully deleted"
@@ -329,7 +327,7 @@ paths:
           description: "id not existing"
         500:
           description: "Server error"
-          
+
   /api/v1.0/products/update/{id}:
     put:
       tags:
@@ -434,7 +432,7 @@ definitions:
       - name
       - price
       - photo
-      
+
   update-Product:
     type: "object"
     properties:
