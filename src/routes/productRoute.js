@@ -31,6 +31,7 @@ router.get("/all-products", verifyToken.verifyToken(user.id, user.label) , produ
 
 router.delete("/delete", verifyToken.verifyToken(admin.id, admin.label), productControllers.deleteProduct);
 
-router.put('/update/:id', productControllers.putProduct)
+router.put('/update/:id', verifyToken.verifyToken(admin.id, admin.label)  , productControllers.putProduct)
+
 
 module.exports = router;
