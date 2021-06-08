@@ -20,8 +20,6 @@ const user = {
   label: "client"
 }
 
-const productsMiddleware = require("../middlewares/productsMiddlewares");
-
 const productControllers = require("../controllers/productControllers");
 
 

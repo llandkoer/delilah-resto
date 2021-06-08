@@ -24,11 +24,14 @@ const createProduct = async (req, res) => {
           type: sequelize.QueryTypes.INSERT
         })
       res.status(200).json({
-        messange: "Producto creado exitosamente"
+        messange: "Successfully created product"
       })
     }
   } catch (error) {
     console.error(error)
+    res.status(400).json({
+      message:"Incorrect data"
+    })
   }
 
 }
@@ -41,6 +44,9 @@ const getAllProducts = async (req, res) => {
   } catch {
     (error => {
       console.error(error)
+      res.status(500).json({
+        message:"server error"
+      })
     })
   }
 }
@@ -102,6 +108,9 @@ const putProduct = async (req, res) => {
 
   } catch (error) {
     console.log(error)
+    res.status(500).json({
+      message: "Server error"
+    })
   }
 
 
