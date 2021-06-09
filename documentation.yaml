@@ -295,7 +295,7 @@ paths:
         500:
           description: "Server error"
 
-  /api/v1.0/products/delete/{id}:
+  /api/v1.0/products/delete/:
     delete:
       tags:
         - "Products"
@@ -304,14 +304,8 @@ paths:
       produces:
         - application/json
       parameters:
-        - in: "body"
-          name: "body"
-          description: "Delete product by id"
-          required: true
-          schema:
-            $ref: "#/definitions/Delete-Product"
-        - in: "path"
-          type: "string"
+        - in: "query"
+          type: "integer"
           name: "id"
           required: true
         - in: "header"
@@ -324,7 +318,9 @@ paths:
         200:
           description: "Product successfully deleted"
         400:
-          description: "id not existing"
+          description: "ID is NaN"
+        404:
+          description: "Product does not exist"
         500:
           description: "Server error"
 
@@ -449,16 +445,6 @@ definitions:
       - name
       - price
       - photo
-
-  Delete-Product:
-    type: "object"
-    properties:
-      Id:
-        type: "number"
-        example: "287"
-    required:
-      - id
-
   Favorite:
     type: "object"
     properties:
