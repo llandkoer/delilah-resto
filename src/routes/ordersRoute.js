@@ -22,6 +22,7 @@ router.get("/all-orders", verifyToken.verifyToken(admin.id, admin.label), orders
 router.get("/order-states", verifyToken.verifyToken(admin.id, admin.label), ordersController.getOrderStates);
 router.get("/payment-methods", verifyToken.verifyToken(admin.id, admin.label), ordersController.getPaymentMethods);
 router.put("/update-state/:id", verifyToken.verifyToken(admin.id, admin.label), ordersMiddlewares.updateOrderStateValidations(), ordersController.updateOrderState);
+router.delete("/delete-order", verifyToken.verifyToken(admin.id, admin.label), ordersController.deleteOrder);
 
 router.post("/create-order", verifyToken.verifyToken(user.id, user.label), ordersMiddlewares.createOrderValidations(),ordersController.createOrder);
 router.get("/all-favorites", verifyToken.verifyToken(user.id, user.label), ordersController.getFavorites);
